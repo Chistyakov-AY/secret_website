@@ -11,7 +11,17 @@
     </div>
   <% end %>
 
+<p>
+  <%= form.label :title %>
+  <%= form.text_area :title, rows: 2, id: :post %>
+</p>
+
+<p>
+  <%= form.label :body %>
+  <%= form.text_area :body, rows: 2, id: :post %>
+</p>
+
   <div>
-    <%= form.submit %>
+    <%= form.submit "Create" %>
   </div>
 <% end %>

@@ -1,2 +1,6 @@
-<div id="<%= dom_id post %>">
-</div>
+<tr>
+  <td><%= post.title %></td> 
+  <td><%= post.body %></td> 
+  <td><%= link_to "Show", post_path(post) %></td>
+  <td><%= button_to "Delete", post_path(post), method: :delete, data: {confirm: "Are you sure?"} %></td>
+</tr>

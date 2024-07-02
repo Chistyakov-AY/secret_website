@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  resources :comments
   root 'posts#index'
 
-  resources :posts
+  resources :posts, shallow: true do
+    resources :comments
+  end
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
