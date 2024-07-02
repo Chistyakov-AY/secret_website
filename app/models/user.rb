@@ -5,7 +5,9 @@ class User < ApplicationRecord
          :registerable,
          :recoverable, 
          :rememberable, 
-         :trackable,
          :validatable,
          :confirmable
+  
+  has_many :posts, dependent: :destroy
+
 end
