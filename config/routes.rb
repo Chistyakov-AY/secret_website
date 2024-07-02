@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  resources :comments
+  
   root 'posts#index'
+
+  devise_for :users, path: :agents, path_names: { sign_in: :login, sign_out: :logout }
+  
+  resources :comments
 
   resources :posts, shallow: true do
     resources :comments
