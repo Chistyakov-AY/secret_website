@@ -2,13 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
-    @posts =  Post.all
-
-    # if @post.answer_selected?(params[:post_ids])
-    #   render current_user.posts
-    # else
-    #   render @posts
-    # end
+    @posts =  Post.order(created_at: :desc).page params[:page]
   end
 
   def new

@@ -1,6 +1,6 @@
 <h3><%= "Post: #{@post.title}" %></h3>
 
-<h5><%= @post.body %></h5>
+<h5><%= truncate @post.body, length: 150, omission: '... (continued)' %></h5>
 
   <h5><%= "Comments:" %></h5>
 
