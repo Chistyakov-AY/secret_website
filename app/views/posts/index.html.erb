@@ -1,13 +1,15 @@
-<h1><%= "All posts:" %></h1>
+<h2><%= "All posts:" %></h2>
 
-<table class="table" >
-  <tr>
-    <th class="text-center"><%= "Title" %></th>
-    <th class="text-center"><%= "Body" %></th>
-    <th colspan="2" ><%= "Action" %></th>
-  </tr>
-  <%= render @posts %>
-</table>
+<% @posts.each do |post| %>
+  <div> 
+    <h4>
+        <%= link_to post.title, post_path(post) %><br>
+        <small><small> Submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.email %></small></small>
+    </h4>
+<% end %>
+
+ 
+
 <p>
 <%= link_to "New post",  new_post_path %>
 </p>

@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
-  get 'users/new'
+  # get 'users/new'
   
   root 'posts#index'
 
   devise_for :users, path: :agents, path_names: { sign_in: :login, sign_out: :logout }
   
-  resources :comments
+  # resources :comments
 
   resources :posts, shallow: true do
+    member do
+      put 'like' => 'links#like'
+      put 'dislike' => 'links#dislike'
+    end
+    
     resources :comments
   end
 

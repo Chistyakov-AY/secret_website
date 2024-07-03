@@ -1,17 +1,12 @@
-<%= form_with(model: comment) do |form| %>
-  <% if comment.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+<h1><%= "New comment:" %></h1>
 
-      <ul>
-        <% comment.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_with(model:[@post, @comment]) do |form| %>
+  <%= render 'shared/flash', resource: @comment %>
 
-  <div>
-    <%= form.submit %>
-  </div>
+  <p>
+    <%= form.label :body, 'Comment'%>
+    <%= form.text_area :body, id: :comment_body, rows: 2 %>
+  </p>
+
+  <p><%= form.submit 'Сохранить' %></p> 
 <% end %>

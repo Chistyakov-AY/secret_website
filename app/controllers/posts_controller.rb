@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
-  before_action :set_user, only: %i[ create ]
 
   def index
     @posts = Post.all
@@ -11,7 +10,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
 
     respond_to do |format|
       if @post.save
@@ -45,11 +44,27 @@ class PostsController < ApplicationController
     end
   end
 
-  private
-  def set_user
-    @user = User.find(params[:id])
+  def like
+    @post = Post.find(params[:id])
+    if (params[:format]) == 'like'
+      @post.liked_by current_user
+    elsif params[:format] == 'unlike'
+      @post.unliked_by current_user
+    end
+    redirect_back fallback_location: root_path
   end
-  
+
+  def dislike
+    @post = Post.find(params[:id])
+    if params[:format] == 'dislike'
+      @post.disliked_by current_user
+    elsif params[:format] == 'undislike'
+      @post.undisliked_by current_user
+    end
+    redirect_back fallback_location: root_path
+  end
+
+  private
   def set_post
     @post = Post.find(params[:id])
   end
