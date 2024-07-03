@@ -1,4 +1,4 @@
-<h2><%= "All posts:" %></h2>
+<h2 class="mt-5"><%= "All posts:" %></h2>
 
 <% @posts.each do |post| %>
   <div> 
@@ -6,10 +6,15 @@
         <%= link_to post.title, post_path(post) %><br>
         <small><small> Submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.email %></small></small>
     </h4>
+    <%= button_to "Delete post", post_path(post), form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete %>
 <% end %>
 
- 
-
 <p>
-<%= link_to "New post",  new_post_path %>
+<%= link_to "New post",  new_post_path %> |
+
+<label>
+  <input type="checkbox">
+  All my posts
+</label>
+
 </p>

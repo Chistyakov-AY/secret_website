@@ -2,7 +2,13 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
-    @posts = Post.all
+    @posts =  Post.all
+
+    # if @post.answer_selected?(params[:post_ids])
+    #   render current_user.posts
+    # else
+    #   render @posts
+    # end
   end
 
   def new
@@ -26,7 +32,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
+        format.html { redirect_to posts_path, notice: "Post was successfully updated." }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -36,33 +42,30 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
-      format.json { head :no_content }
+    @post.destroy
+      redirect_to posts_path, notice: "Post was successfully destroyed."
     end
   end
 
-  def like
-    @post = Post.find(params[:id])
-    if (params[:format]) == 'like'
-      @post.liked_by current_user
-    elsif params[:format] == 'unlike'
-      @post.unliked_by current_user
-    end
-    redirect_back fallback_location: root_path
-  end
+  # def like
+  #   @post = Post.find(params[:id])
+  #   if (params[:format]) == 'like'
+  #     @post.liked_by current_user
+  #   elsif params[:format] == 'unlike'
+  #     @post.unliked_by current_user
+  #   end
+  #   redirect_back fallback_location: root_path
+  # end
 
-  def dislike
-    @post = Post.find(params[:id])
-    if params[:format] == 'dislike'
-      @post.disliked_by current_user
-    elsif params[:format] == 'undislike'
-      @post.undisliked_by current_user
-    end
-    redirect_back fallback_location: root_path
-  end
+  # def dislike
+  #   @post = Post.find(params[:id])
+  #   if params[:format] == 'dislike'
+  #     @post.disliked_by current_user
+  #   elsif params[:format] == 'undislike'
+  #     @post.undisliked_by current_user
+  #   end
+  #   redirect_back fallback_location: root_path
+  # end
 
   private
   def set_post
@@ -72,4 +75,3 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :body, :name)
   end
-end

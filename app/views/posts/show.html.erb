@@ -1,34 +1,15 @@
-<h1><%= "Post: #{@post.title}" %></h1>
+<h3><%= "Post: #{@post.title}" %></h3>
 
+<h5><%= @post.body %></h5>
 
-<table class="table" >
-  <tr>
-    <th class="text-center"><%= "Title" %></th>
-    <th class="text-center"><%= "Body" %></th>
-    <th class="text-center"><%= "Action" %></th>
-  </tr>
-  <tr>
-    <td><%= @post.title %></td> 
-    <td><%= @post.body %></td> 
-    <td><%= link_to "Edit", edit_post_path(@post) %></td> 
-  </tr>
-</table>
+  <h5><%= "Comments:" %></h5>
 
-<br>
-
-<table class="table" >
-  <tr>
-    <th class="text-center"><%= "Comments" %></th>
-  </tr>
-  <tr>
-    <% Comment.all.each do |i| %> 
-      <td><%= i.body %></td> 
-    <% end %> 
-    
-  </tr>
-</table>
+  <% @post.comments.each do |i| %> 
+    <ol><%= i.body %></ol> 
+  <% end %> 
 
 <div>
-  <%= link_to "Back", posts_path %>
-  <%= link_to "New comment", new_post_comment_path(@post) %>
+  <br>
+    <%= link_to "Back", posts_path %>
+    <%= link_to "New comment", new_post_comment_path(@post) %>
 </div>

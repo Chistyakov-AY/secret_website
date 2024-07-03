@@ -4,6 +4,8 @@ ruby "3.3.3"
 gem 'pg'
 gem "sassc-rails"
 gem 'acts_as_votable'
+gem 'will_paginate'
+gem 'faker'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3.4"
