@@ -2,7 +2,8 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
-    @posts =  Post.order(updated_at: :desc).page params[:page]
+    my_posts = params[:my] == '1' ? current_user.posts : Post
+    @posts = my_posts.order(updated_at: :desc).page params[:page]
   end
 
   def new
@@ -67,5 +68,5 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :name, images: [])
+    params.require(:post).permit(:title, :body, :name, :image)
   end

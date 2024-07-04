@@ -9,7 +9,7 @@
 #   end
 
 Post.destroy_all
-Comment.destroy_all
+# Comment.destroy_all
 
 15.times do
   title = Faker::Hipster.sentence(word_count: 3)
@@ -22,5 +22,5 @@ end
 # p3 = Post.create(title: "3 post", body: "Information for the third post", user_id: 1)
 # p4 = Post.create(title: "4 post", body: "Information for the fourth post", user_id: 1)
 
-c = Comment.create(body: "Комментарий", post_id: Post.first)
-c = Comment.create(body: "Комментарий №2", post_id: Post.first)
+# c = Comment.create(body: "Комментарий", post_id: Post.first)
+# c = Comment.create(body: "Комментарий №2", post_id: Post.first)

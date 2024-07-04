@@ -1,28 +1,24 @@
 Rails.application.routes.draw do
-  # get 'users/new'
-  
   root 'posts#index'
 
   devise_for :users, path: :agents, path_names: { sign_in: :login, sign_out: :logout }
-  
+  ActiveAdmin.routes(self)
+
   # resources :comments
 
   resources :posts, shallow: true do
-    member do
-      put 'like' => 'links#like'
-      put 'dislike' => 'links#dislike'
-    end
+    # member do
+    #   put 'like' => 'links#like'
+    #   put 'dislike' => 'links#dislike'
+    # end
     
     resources :comments
   end
 
+  namespace :admin do
+    resources :users, only: :index
+    resources :posts, only: :index
+  end
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end
