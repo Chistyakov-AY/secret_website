@@ -11,6 +11,7 @@
         <small><small> Submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.email %></small></small>
     </h4>
     <%= button_to "Delete post", post_path(post), form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete %>
+    
 <% end %><br>
 
 <div>

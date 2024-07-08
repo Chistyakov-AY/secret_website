@@ -14,7 +14,8 @@
       <% if user_signed_in? %>
         <div  style="display: inline-block; text-align: right; width: 100%">
           Welcome, Agent <b><%= current_user.email %></b>
-          <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+          <%= link_to 'Logout', destroy_user_session_path, method: :delete %> |
+          <%= link_to 'New user', new_admin_user_path %>
         </div>
       <% end %>
 

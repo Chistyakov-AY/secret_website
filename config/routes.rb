@@ -15,10 +15,10 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  namespace :admin do
-    resources :users, only: :index
-    resources :posts, only: :index
-  end
+  # namespace :admin do
+  #   resources :users, only: :index
+  #   resources :posts, only: :index
+  # end
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
