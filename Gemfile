@@ -18,7 +18,6 @@ gem "bootsnap", require: false
 gem "image_processing"
 gem 'webpacker'
 # gem 'rspec'
-gem 'rails-controller-testing'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
@@ -36,5 +35,7 @@ end
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
+  gem 'rails-controller-testing'
+
   # gem 'simplecov'
 end
