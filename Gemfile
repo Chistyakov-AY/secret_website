@@ -17,20 +17,24 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "image_processing"
 gem 'webpacker'
+# gem 'rspec'
+gem 'rails-controller-testing'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
   gem 'faker'
-  gem 'rspec-rails'
+  # gem 'webmock', '~> 3.23.1'
 end
 
 group :development do
   gem "web-console"
   gem "letter_opener"
   gem 'byebug'
+  gem 'rspec-rails'
 end
 
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
+  # gem 'simplecov'
 end
