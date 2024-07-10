@@ -9,6 +9,7 @@ RSpec.describe PostsController, type: :controller do
     #   get :, {:title, :body}
       
     # end
+    
 
     it "returns a success response" do
       get :index

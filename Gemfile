@@ -22,7 +22,7 @@ gem 'webpacker'
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
   gem 'faker'
-  # gem 'webmock', '~> 3.23.1'
+  gem 'factory_bot_rails'
 end
 
 group :development do

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   # resources :comments
+  # resources :comments, only: :index
+
 
   resources :posts, shallow: true do
     # member do

@@ -1,11 +1,17 @@
 # require "spec_helper"
 require "rails_helper"
+before { login(user) }
 
-RSpec.describe CommentsController, type: :controller do
-  describe "index action" do
+RSpec.describe Admin::CommentsController, type: :controller do
+
+  describe "index action" do 
     it "render index template if comments is found" do
       get :index
       response.should render_template('index')
+    end
+
+    it "route_to admin/comments#index" do #ok
+      expect(get: 'admin/comments').to route_to(controller: "admin/comments", action: "index")
     end
 
     it "returns a success response" do
@@ -13,9 +19,9 @@ RSpec.describe CommentsController, type: :controller do
       expect(response).to have_http_status(:ok)
     end
 
-    it "responds successfully" do
+    it "redirect to 302" do #ok
       get :index
-      expect(response.status).to eq(200)
+      expect(response.status).to eq(302)
     end
   end
 
@@ -33,7 +39,7 @@ RSpec.describe CommentsController, type: :controller do
 
   describe "create action" do
     it "save?" do
-        post :create, comment: {body: "body"}
+        post :create, params: { comment: {body: "body"} }
         response.should redirect_to(post_path(assigns(:post)))
     end
     
