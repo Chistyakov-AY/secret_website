@@ -1,10 +1,16 @@
 # require "spec_helper"
 require "rails_helper"
-before { login(user) }
 
 RSpec.describe Admin::CommentsController, type: :controller do
 
-  describe "index action" do 
+  describe "#index action" do
+    before { 
+      user = User.find_by(id: 5)
+      sign_in user
+      # login @user 
+      # user.confirm!
+    }
+    
     it "render index template if comments is found" do
       get :index
       response.should render_template('index')
@@ -19,9 +25,9 @@ RSpec.describe Admin::CommentsController, type: :controller do
       expect(response).to have_http_status(:ok)
     end
 
-    it "redirect to 302" do #ok
+    it "status response == 200" do #ok with status 302
       get :index
-      expect(response.status).to eq(302)
+      expect(response.status).to eq(200)
     end
   end
 
