@@ -1,4 +1,9 @@
-require "rails_helper"
+require 'rails_helper'
+
 RSpec.describe Comment, type: :model do
-  it { should have_on :post }
+  it "validate body" do
+    comment = Comment.new(body: '')
+    comment.valid?
+    comment.errors[:body].should_not be_empty
+  end
 end
