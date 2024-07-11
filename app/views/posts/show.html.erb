@@ -5,6 +5,8 @@
   <p><%= image_tag @post.image %></p>
 <% end%>
 
+
+
 <% if @post.comments.present? %>
   <h5><%= "Comments:" %></h5>
   <% @post.comments.each do |i| %> 

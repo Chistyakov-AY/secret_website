@@ -1,7 +1,17 @@
 <h1><%= "New comment:" %></h1>
 
 <%= form_with(model:[@post, @comment]) do |form| %>
-  <%= render 'shared/flash', resource: @comment %>
+  <% if @comment.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% @comment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <p>
     <%= form.label :body, 'Comment'%>
