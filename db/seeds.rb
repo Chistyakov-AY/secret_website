@@ -23,4 +23,4 @@ end
 # p4 = Post.create(title: "4 post", body: "Information for the fourth post", user_id: 1)
 
 # c = Comment.create(body: "Комментарий", post_id: Post.first)
-# c = Comment.create(body: "Комментарий №2", post_id: Post.first)
+# c = Comment.create(body: "Комментарий №2", post_id: Post.first)AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

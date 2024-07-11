@@ -1,91 +1,75 @@
 # require "spec_helper"
 require "rails_helper"
+require 'byebug'
 
-RSpec.describe Admin::CommentsController, type: :controller do
+RSpec.describe CommentsController, type: :controller do
+  let!(:user1) { create :user}
+  let!(:post1) { create :post}
+  let!(:comment1) { create :comment}
+  
+  before { 
+    user1.confirm
+    login user1 
+  }
 
   describe "#index action" do
-    before { 
-      user = User.find_by(id: 5)
-      sign_in user
-      # login @user 
-      # user.confirm!
-    }
-    
-    it "render index template if comments is found" do
-      get :index
+    it "render index template if comments is found" do #ok
+      get :index, params: {post_id: post1.id}
       response.should render_template('index')
     end
 
-    it "route_to admin/comments#index" do #ok
-      expect(get: 'admin/comments').to route_to(controller: "admin/comments", action: "index")
-    end
-
-    it "returns a success response" do
-      get :index
+    it "returns a success response" do #ok
+      get :index, params: {post_id: post1.id}
       expect(response).to have_http_status(:ok)
     end
 
-    it "status response == 200" do #ok with status 302
-      get :index
+    it "status response == 200" do #ok
+      get :index, params: {post_id: post1.id}
       expect(response.status).to eq(200)
     end
   end
 
-  describe "new action" do
-    it "render new template if comments is found" do
-      get :new
+  describe "#new action" do
+    it "render new template if comments is found" do #ok
+      get :new, params: {post_id: post1.id}
       response.should render_template('new')
     end
 
-    it "assigns a blank subscription to the view" do
-      get :new
+    it "assigns a blank subscription to the view" do #ok
+      get :new, params: {post_id: post1.id}
       expect(assigns(:comment)).to be_a_new(Comment)
     end
+
+    it "returns a success response" do #ok
+      get :new, params: {post_id: post1.id}
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "status response == 200" do #ok
+      get :new, params: {post_id: post1.id}
+      expect(response.status).to eq(200)
+    end
   end
 
-  describe "create action" do
+  describe "#create action" do
     it "save?" do
-        post :create, params: { comment: {body: "body"} }
-        response.should redirect_to(post_path(assigns(:post)))
+      post :create, params: { post_id: post1.id, comment: { body: "Test" } } #ok
+      response.should redirect_to(post_path(post1.id))
     end
     
-    it "render template new if validaton pass" do
-        post :create, comment: {body: nil}
-        response.should render_template('new')
+    it "render template new if validation pass" do
+      post :create, params: { post_id: post1.id, comment: { body: nil } } #ok
+      response.should render_template('new')
     end
 
-    it "render 403 if user not admin" do
-      post :create, comment: {body: "body"}
-      response.status.should == 403
-    end
-  end
-  
-  describe "destroy action" do
-    it "redirect to comments_path when comment destroy" do
-      comment = create(:comment)
-      delete :destroy, id: comment.id
-      response.should redirect_to(comments_path)
+    it "returns a success response" do
+      get :create, params: { post_id: post1.id, comment: { body: "Test" } }
+      expect(response).to have_http_status(:redirect)
     end
 
-    it "render 404 if post not find" do
-      delete :destroy, id: 0
-      response.status.should == 404
+    it "status response == 200" do 
+      get :create, params: { post_id: post1.id, comment: { body: "Test" } }
+      expect(response.status).to eq(302)
     end
   end
-
-  # describe "Show action" do
-  #   it "render show template if comment is found" do
-  #     show = create(:show)
-  #     get :show
-  #     response.should render_template('show')
-  #   end
-  # end
-
-  # context "POST create" do
-  #   it "redirects to pending subscriptions page" do
-  #     params = { subscription: { body: "Для теста" } }
-  #     post :create, params
-  #     expect(response).to redirect_to(post_path(self))
-  #   end
-  # end
 end

@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[ show edit update destroy ]
+  before_action :set_comment, only: %i[ show edit update ]
   before_action :set_post, only: %i[ new create ]
 
   def index
@@ -8,9 +8,6 @@ class CommentsController < ApplicationController
 
   def new
     @comment = @post.comments.new
-  end
-
-  def edit
   end
 
   def create
@@ -32,15 +29,6 @@ class CommentsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  def destroy
-    @comment.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to comments_url, notice: "Comment was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
   root 'posts#index'
 
   devise_for :users, path: :agents, path_names: { sign_in: :login, sign_out: :logout }
