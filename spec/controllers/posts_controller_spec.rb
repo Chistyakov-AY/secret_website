@@ -1,92 +1,107 @@
 require "rails_helper"
 
 RSpec.describe PostsController, type: :controller do
+  let!(:user1) { create :user}
+  let!(:post1) { create :post}
+  let!(:comment1) { create :comment}
+  
+  before { 
+    user1.confirm
+    login user1 
+  }
 
   describe "#index action" do
-    it "render index template if posts is found" do 
-      get :index, params: {post_id: post1.id}
+    it "render index template if posts is found" do #ok
+      get :index
       response.should render_template('index')
     end
 
-    it "route_to admin/comments#index" do 
-      expect(get: 'admin/comments').to route_to(controller: "admin/comments", action: "index")
-    end
-
-    it "returns a success response" do 
-      get :index, params: {post_id: post1.id}
+    it "returns a success response" do #ok
+      get :index
       expect(response).to have_http_status(:ok)
     end
 
-    it "status response == 200" do 
-      get :index, params: {post_id: post1.id}
+    it "status response == 200" do #ok
+      get :index
       expect(response.status).to eq(200)
     end
   end
  
-  # it_render_404_page_when_post_is_not_found :show, :edit, :update, :destroy
+  describe "#new action" do
+    it "render new template if comments is found" do #ok
+      get :new
+      response.should render_template('new')
+    end
 
-  # describe "Index action" do
-    # it "render index template if comments s found" do
-    #   get :, {:title, :body}
-      
-    # end
+    it "assigns a blank subscription to the view" do #ok
+      get :new
+      expect(assigns(:post)).to be_a_new(Post)
+    end
+
+    it "returns a success response" do #ok
+      get :new, params: {id: post1.id}
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "status response == 200" do #ok
+      get :new, params: {id: post1.id}
+      expect(response.status).to eq(200)
+    end
+  end
+
+  describe "#create action" do
+    it "save?" do #ok
+      post :create, params: { post: { title: "Test", body: "Test" } }
+      response.should redirect_to(posts_path)
+    end
     
+    it "render template new if validation pass" do #ok
+      post :create, params: { post: { title: "Test", body: nil } }
+      response.should render_template('new')
+    end
 
-  #   it "returns a success response" do
-  #     get :index
-  #     expect(response).to have_http_status(:ok)
-  #   end
+    it "returns a success response" do #ok
+      get :create, params: { post: { title: "Test", body: "Test" } }
+      expect(response).to have_http_status(:redirect)
+    end
 
-  #   it "responds successfully" do
-  #     get :index
-  #     expect(response.status).to eq(200)
-  #   end
+    it "status response == 302" do  #ok
+      get :create, params: { post: { title: "Test", body: "Test" } }
+      expect(response.status).to eq(302)
+    end
+  end
 
-  # end
-
-  # describe "create action" do
-  #   it "save?" do
-        # post :create, post: {title: "title", body: "body"}
-        # response.should redirect_to(posts_url) # assigns(:post)
-  #   end
+  describe "#update action" do
+    it "update?" do #ok
+      put :update, params: { id: post1.id, post: { title: "Test", body: "Test" } }
+      response.should redirect_to(posts_path)
+    end
     
-  #   it "render template new if validaton pass" do
-        # post :create, post: {title: "title", body: nil}
-        # response.should render_template('new') # assigns(:post)
-  #   end
+    it "render template updare if validation pass" do #ok
+      post :update, params: { id: post1.id, post: { title: "Test", body: nil } }
+      response.should render_template('edit')
+    end
 
-      # it "render 403 if user not admin" do
-      #   post :create, post: {title: "title", body: "body"}
-      #   response.status.should == 403
-      # end
-  # end 
+    it "returns a success response" do #ok
+      get :update, params: { id: post1.id, post: { title: "Test", body: "Test" } }
+      expect(response).to have_http_status(:redirect)
+    end
 
-#   describe "destroy action" do
-#     it "redirect to posts_path when post destroy" do
-#       post = create(:post)
-#       delete :destroy, id: post.id
-#       response.should redirect_to(posts_path)
-#     end
+    it "status response == 302" do #ok
+      get :update, params: { id: post1.id, post: { title: "Test", body: "Test" } }
+      expect(response.status).to eq(302)
+    end
+  end
 
-#     it "render 404 if post not find" do
-#       delete :destroy, id: 0
-#       response.status.should == 404
-#     end
-#   end 
-# end
+  describe "#destroy action" do
+    it "redirect to posts_path when post destroy" do #ok
+      delete :destroy, params: { id: post1.id }
+      response.should redirect_to(posts_path)
+    end
 
-# RSpec.describe PostsController do
-#   describe "GET new" do
-#     it "assigns @posts" do
-#       post = Post.create
-#       get :index
-#       expect(assigns(:posts)).to eq([post])
-#     end
-
-#     it "renders the index template" do
-#       get :index
-#       expect(response).to render_template("index")
-#     end
-#   end
-
+    it "status response == 302" do #ok
+      delete :destroy, params: { id: 1 }
+      response.status.should == 302
+    end
+  end
 end

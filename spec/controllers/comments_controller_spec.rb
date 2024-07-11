@@ -63,12 +63,12 @@ RSpec.describe CommentsController, type: :controller do
     end
 
     it "returns a success response" do
-      get :create, params: { post_id: post1.id, comment: { body: "Test" } }
+      get :create, params: { post_id: post1.id, comment: { body: "Test" } } #ok
       expect(response).to have_http_status(:redirect)
     end
 
-    it "status response == 200" do 
-      get :create, params: { post_id: post1.id, comment: { body: "Test" } }
+    it "status response == 302" do 
+      get :create, params: { post_id: post1.id, comment: { body: "Test" } } #ok
       expect(response.status).to eq(302)
     end
   end
