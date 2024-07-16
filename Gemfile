@@ -17,7 +17,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "image_processing"
 gem 'webpacker'
-# gem 'rspec'
+gem 'arctic_admin'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
@@ -37,6 +37,4 @@ group :test do
   gem "selenium-webdriver"
   gem 'rails-controller-testing'
   # gem 'shoulda-matchers', require: false
-
-  # gem 'simplecov'
 end

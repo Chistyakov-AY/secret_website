@@ -10,6 +10,8 @@ ActiveAdmin.setup do |config|
   # users to your main site. Defaults to no link.
   #
   # config.site_title_link = "/"
+  
+  # ActiveAdmin.application.load_paths.unshift(Dir["#{Gem.loaded_specs['arctic_admin'].full_gem_path}/app/admin"])
 
   # Set an optional image to be displayed for the header
   # instead of a string (overrides :site_title)

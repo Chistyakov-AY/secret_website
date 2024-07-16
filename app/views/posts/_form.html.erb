@@ -12,18 +12,18 @@
   <% end %>
 
 <p>
-  <%= form.label :title %>
+  <%= form.label :title %><br>
   <%= form.text_area :title, rows: 2, id: :post %>
 </p>
 
 <p>
-  <%= form.label :body %>
+  <%= form.label :body %><br>
   <%= form.text_area :body, rows: 2, id: :post %>
 </p>
 
 <%= form.file_field :image %>
 
   <div>
-    <%= form.submit "Create" %>
+    <br><%= form.submit "Create" %>
   </div>
 <% end %>

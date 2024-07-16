@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  
 
   def index
     my_posts = params[:my] == '1' ? current_user.posts : Post
