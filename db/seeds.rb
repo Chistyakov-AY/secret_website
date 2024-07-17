@@ -1,14 +1,14 @@
 
 Post.destroy_all
-# User.destroy_all
+User.destroy_all
 # Comment.destroy_all
 
-if User.all.empty?
+# if User.all.empty?
   user1 = User.create!(name: "User1", email: "1111@mail.ru", password: "111111")
   user2 = User.create!(name: "User2", email: "dolomit.odn@mail.ru", password: "111111")
   user1.confirm
   user2.confirm
-end
+# end
 
 15.times do
   title = Faker::Hipster.sentence(word_count: 3)
