@@ -6,7 +6,8 @@ services:
     build: .
     command: rails s -b 0.0.0.0
     volumes:
-      - .:/docker_project
+      - storage:/app/storage
+      - rails_log:/app/log
     ports:
       - "3000:3000"
     restart: always
@@ -25,3 +26,5 @@ services:
 
 volumes:
   pg_data:
+  storage:
+  rails_log:

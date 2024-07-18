@@ -2,7 +2,7 @@
 
 <h5><%= truncate @post.body, length: 150, omission: '... (continued)' %></h5>
 <% if @post.image.attached? %>
-  <p><%= image_tag @post.image %></p> #.variant(resize: "100x100!")
+  <p><%= image_tag @post.image %></p> 
 <% end%>
 
 <% if @post.comments.present? %>

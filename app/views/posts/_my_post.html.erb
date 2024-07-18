@@ -1,6 +1,4 @@
-
-
-<% @posts.each do |post| %>
+<% @my_posts.each do |post| %>
   <div> 
     <h4>
         <%= link_to post.title, post_path(post) %><br>
@@ -13,4 +11,4 @@
 <p>
 <%= link_to "New post",  new_post_path %>
 
-| <%= link_to "Only my posts", my_posts_path %>
+| <%= link_to "All posts", posts_path %>

@@ -1,30 +1,8 @@
-<h2 class="mt-5"><%= "All posts:" %></h2>
+<h1>All posts:</h1>
 
+<%= render "post", get: @posts %>
+
+<br>
 <div>
   <%= paginate @posts %>
 </div>
-
-<% @posts.each do |post| %>
-  <div> 
-    <h4>
-        <%= link_to post.title, post_path(post) %><br>
-        <small><small> Submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.email %></small></small>
-    </h4>
-    <%= button_to "Delete post", post_path(post), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } } %>
-    
-<% end %><br>
-
-<div>
-  <%= paginate @posts %>
-</div>
-
-<p>
-<%= link_to "New post",  new_post_path %> |
-
-<% if params[:my] == '1' %>
-<%= link_to "All",  posts_path(my: 0) %> 
-<% else %>
-<%= link_to "My",  posts_path(my: 1) %> 
-<% end %>
-</p>
-
