@@ -1,75 +1,47 @@
-# require "spec_helper"
+# frozen_string_literal: true
 require "rails_helper"
-require 'byebug'
 
 RSpec.describe CommentsController, type: :controller do
-  let!(:user1) { create :user}
-  let!(:post1) { create :post}
-  let!(:comment1) { create :comment}
+  let!(:user1) { sign_in create(:user) }
+  let!(:post1) { create :post }
+  let!(:comment1) { create :comment }
+  let!(:comment2) { build :comment }
   
-  before { 
-    user1.confirm
-    login user1 
-  }
+  # before { 
+  #   user1.confirm
+  #   login user1 
+  # }
 
-  describe "#index action" do
-    it "render index template if comments is found" do #ok
-      get :index, params: {post_id: post1.id}
-      response.should render_template('index')
-    end
-
-    it "returns a success response" do #ok
-      get :index, params: {post_id: post1.id}
-      expect(response).to have_http_status(:ok)
-    end
-
-    it "status response == 200" do #ok
-      get :index, params: {post_id: post1.id}
-      expect(response.status).to eq(200)
-    end
+  it "#index" do #ok
+    get :index, params: {post_id: post1.id}
+    response.should render_template('index')
+    expect(response).to have_http_status(:ok)
+    # expect(response.status).to eq(200)
   end
 
-  describe "#new action" do
-    it "render new template if comments is found" do #ok
-      get :new, params: {post_id: post1.id}
-      response.should render_template('new')
-    end
-
-    it "assigns a blank subscription to the view" do #ok
-      get :new, params: {post_id: post1.id}
-      expect(assigns(:comment)).to be_a_new(Comment)
-    end
-
-    it "returns a success response" do #ok
-      get :new, params: {post_id: post1.id}
-      expect(response).to have_http_status(:ok)
-    end
-
-    it "status response == 200" do #ok
-      get :new, params: {post_id: post1.id}
-      expect(response.status).to eq(200)
-    end
+  it "#new" do #ok
+    get :new, params: {post_id: post1.id}
+    response.should render_template('new')
+    expect(assigns(:comment)).to be_a_new(Comment)
+    expect(response).to have_http_status(:ok)
+    # expect(response.status).to eq(200)
   end
 
-  describe "#create action" do
-    it "save?" do
+  describe "#create" do
+    it "with params" do
       post :create, params: { post_id: post1.id, comment: { body: "Test" } } #ok
       response.should redirect_to(post_path(post1.id))
+      expect(response).to have_http_status(:redirect)
+      expect(Comment.first.attributes["id"]).to eq(comment1.id)
+      expect(comment2.attributes["id"]).to eq(nil)
+      expect(comment1.attributes["id"]).not_to eq(nil)
+      # expect(response.status).to eq(302)
     end
     
-    it "render template new if validation pass" do
+    it "with params, body - nil" do
       post :create, params: { post_id: post1.id, comment: { body: nil } } #ok
       response.should render_template('new')
-    end
-
-    it "returns a success response" do
-      get :create, params: { post_id: post1.id, comment: { body: "Test" } } #ok
-      expect(response).to have_http_status(:redirect)
-    end
-
-    it "status response == 302" do 
-      get :create, params: { post_id: post1.id, comment: { body: "Test" } } #ok
-      expect(response.status).to eq(302)
+      expect(Comment.first.attributes["id"]).to eq(comment1.id)
     end
   end
 end

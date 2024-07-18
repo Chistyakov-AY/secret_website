@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :comment do
-    id { 1 }
-    body { Faker::Hipster .sentence(word_count: 3) }
-    post_id { 1 }
+    body { Faker::Lorem.word }
+    post_id { create(:post).id }
   end
 end
