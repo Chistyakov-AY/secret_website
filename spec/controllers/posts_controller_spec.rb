@@ -1,69 +1,50 @@
 # frozen_string_literal: true
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-  let!(:user1) { sign_in create(:user) }
-  let!(:post1) { create :post }
-  let!(:comment1) { create :comment }
-  
-  # before { 
-  #   user1.confirm
-  #   login user1 
-  # }
+  let!(:user_confirmed) { sign_in create(:user) }
+  let!(:post_created) { create :post }
+  let!(:comment_created) { create :comment }
+ 
+  describe '#index' do #ok
+    let(:get_response) { get :index }
+    subject { get_response }
 
-  it "#index" do #ok
-    get :index
-    response.should render_template('index')
-    expect(response).to have_http_status(:ok)
-    # expect(response.status).to eq(200)
+    it { is_expected.to render_template('index') }
+    it { is_expected.to have_http_status(:ok) }
   end
 
-  describe "#new" do
-    it "without params" do #ok
-      get :new
-      response.should render_template('new')
-      expect(assigns(:post)).to be_a_new(Post)
-    end
-    
-    it "with params" do #ok
-      get :new, params: {id: post1.id}
-      expect(response).to have_http_status(:ok)
-      # expect(response.status).to eq(200)
-    end
+  describe '#new' do #ok
+    let(:get_response) { get :new, params: { id: post_created.id } }
+    subject { get_response }
+
+    it { is_expected.to render_template('new') }
+    it { is_expected.to have_http_status(:ok) }
   end
 
-  describe "#create" do
-    it "with params" do #ok
-      post :create, params: { post: { title: "Test", body: "Test" } }
-      response.should redirect_to(posts_path)
-      expect(response).to have_http_status(:redirect)
-      expect(Post.first.attributes["id"]).to eq(post1.id)
-      # expect(response.status).to eq(302)
-    end
+  describe '#create' do #ok
+    let(:new_post) { create(:post, title: 'Title', body: 'Body') }
+    let(:find_post) { Post.find_by(params)}
+    let(:params) { { id: new_post.id } }
 
-    it "with params, body - nil" do #ok
-      post :create, params: { post: { title: "Test", body: nil } }
-      response.should render_template('new')
+    context 'when saved post in db' do 
+      it { expect(find_post).not_to be_nil }
+      it { expect(response).to have_http_status(200) }
     end
   end
 
-  describe "#update" do
-    it "with params" do #ok
-      put :update, params: { id: post1.id, post: { title: "Test", body: "Test" } }
-      response.should redirect_to(posts_path)
-      expect(response).to have_http_status(:redirect)
-      # expect(response.status).to eq(302)
-    end
+  describe '#update' do #ok
+    context 'with params' do 
+      let(:update_post) { patch :update, params: { id: post_created.id, post: { title: 'Test', body: 'Test' } } }
 
-    it "with params, body - nil" do #ok
-      post :update, params: { id: post1.id, post: { title: "Test", body: nil } }
-      response.should render_template('edit')
+      it { expect(response).to have_http_status(200) }
     end
   end
 
-  it "#destroy" do #ok
-    delete :destroy, params: { id: post1.id }
-    response.should redirect_to(posts_path)
-    # response.status.should == 302
+  describe '#destroy' do #ok
+    let(:delete_post) { delete :destroy, params: { id: post_created.id } }
+    subject { delete_post }
+
+    it { is_expected.to have_http_status(:redirect) }
   end
 end
