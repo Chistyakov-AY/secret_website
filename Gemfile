@@ -1,40 +1,51 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 ruby '3.3.3'
-gem 'pg'
-gem 'sassc-rails'
-gem 'kaminari'
 gem 'activeadmin'
-gem 'importmap-rails'
-gem 'turbo-rails'
-gem 'rails', '~> 7.1.3.4'
-gem 'sprockets-rails'
-gem 'puma', '>= 5.0'
-gem 'stimulus-rails'
-gem 'jbuilder'
-gem 'devise'
-gem 'tzinfo-data', platforms: %i[ windows jruby ]
-gem 'bootsnap', require: false
-gem 'image_processing'
-gem 'webpacker'
 gem 'arctic_admin'
+gem 'bootsnap', require: false
+gem 'devise'
+gem 'image_processing'
+gem 'importmap-rails'
+gem 'jbuilder'
+gem 'kaminari'
+gem 'pg'
+gem 'puma', '>= 5.0'
 gem 'pundit', '~> 2.3'
+gem 'rails', '~> 7.1.3.4'
+gem 'rubocop'
+# gem 'rubocop-capybara'
+# gem 'rubocop-factory_bot'
+# gem 'rubocop-rails'
+gem 'rubocop-rspec'
+# gem 'rubocop-rspec_rails'
+gem 'sassc-rails'
+gem 'sprockets-rails'
+gem 'stimulus-rails'
+gem 'turbo-rails'
+gem 'tzinfo-data', platforms: %i[windows jruby]
+gem 'webpacker'
+# gem 'acts_as_votable'
+gem 'rmagick'
+gem 'ruby-vips'
+gem 'mini_magick'
 
 group :development, :test do
-  gem 'debug', platforms: %i[ mri windows ]
-  gem 'faker'
+  gem 'debug', platforms: %i[mri windows]
   gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rspec-rails'
 end
 
 group :development do
-  gem 'web-console'
-  gem 'letter_opener'
   gem 'byebug'
-  gem 'rspec-rails'
+  gem 'letter_opener'
+  gem 'web-console'
 end
 
 group :test do
   gem 'capybara'
-  gem 'selenium-webdriver'
   gem 'rails-controller-testing'
-  # gem 'shoulda-matchers', require: false
+  gem 'selenium-webdriver'
 end

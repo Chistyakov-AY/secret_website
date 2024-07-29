@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.6.0",
     "@rails/webpacker": "5.4.4",
+    "arctic_admin": "^4.3.1",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   },

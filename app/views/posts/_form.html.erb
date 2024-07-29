@@ -21,7 +21,7 @@
   <%= form.text_area :body, rows: 2, id: :post %>
 </p>
 
-<%= form.file_field :image %>
+<%= form.file_field :image, remote: true %>
 
   <div>
     <br><%= form.submit "Create" %>

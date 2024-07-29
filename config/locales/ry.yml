@@ -1,0 +1,17 @@
+ru:
+  hello: "Привет мир!"
+
+  comments:
+    create:
+      comment_created: 'Комментарий был успешно создан!'
+    update:
+      comment_updated: 'Комментарий был успешно обновлен!'
+  
+  posts:
+    create:
+      post_created: 'Пост был успешно создан!'
+    update:
+      post_updated: 'Пост был успешно обновлен!'
+    destroy:
+      post_destroy: 'Пост был успешно удален!'
+      

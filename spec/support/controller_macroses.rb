@@ -1,6 +1,6 @@
+# frozen_string_literal: true
+
 module ControllerMacros
-  
-  
   # def self.included(base)
   #   base.extend(ClassMetods)
   # end
@@ -22,5 +22,4 @@ module ControllerMacros
   #     end
   #   end
   # end
-
 end

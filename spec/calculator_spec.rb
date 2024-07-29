@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 # require_relative '../spec/lib/calculator'
 # # require 'rails_helper'
-
 
 # describe Calculator do
 #   describe '#add' do
