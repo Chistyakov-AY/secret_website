@@ -1,0 +1,134 @@
+require:
+- 'rubocop'
+- 'rubocop-rspec'
+
+# RSpec/AggregateFailures:
+#   Enabled: true
+#   Include:
+#     - 'spec/**/*.rb'
+
+AllCops:
+  TargetRubyVersion: 3.3.3
+  NewCops: enable
+  Exclude:
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - 'bin/**/*'
+    - db/*schema.rb
+    - db/seeds.rb
+    
+    # - config/initializers/enumerize_monkey_patch.rb
+    # - lib/tasks/auto_annotate_models.rake
+    # - karafka.rb
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: true
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/RescueStandardError:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/SymbolArray:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 150
+  Exclude:
+    - 'config/routes.rb'
+    - '**/spec/**/*.rb'
+
+Metrics/BlockLength:
+  Max: 30
+  AllowedMethods:
+    - 'describe'
+    - 'context'
+    - 'draw'
+    - 'setup'
+    - 'resources'
+    - 'resource'
+    - 'route_param'
+    - 'included'
+    - 'namespace'
+  Exclude:
+    - 'lib/tasks/**/*'
+    - '**/spec/**/*.rb'
+    
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - 'db/migrate/**/*'
+    - '**/spec/**/*.rb'
+
+Metrics/ClassLength:
+  Max: 150
+  Exclude:
+    - '**/spec/**/*.rb'
+
+Metrics/AbcSize:
+  Max: 30
+  Exclude:
+    - '**/spec/**/*.rb'
+
+Lint/SymbolConversion: # new in 1.9
+  Enabled: true
+Lint/ToEnumArguments: # new in 1.1
+  Enabled: true
+Lint/TripleQuotes: # new in 1.9
+  Enabled: true
+Lint/UnexpectedBlockArity: # new in 1.5
+  Enabled: true
+Lint/UnmodifiedReduceAccumulator: # new in 1.1
+  Enabled: true
+Style/ArgumentsForwarding: # new in 1.1
+  Enabled: true
+Style/CollectionCompact: # new in 1.2
+  Enabled: true
+Style/DocumentDynamicEvalDefinition: # new in 1.1
+  Enabled: true
+Style/EndlessMethod: # new in 1.8
+  Enabled: true
+Style/HashConversion: # new in 1.10
+  Enabled: true
+Style/HashExcept: # new in 1.7
+  Enabled: true
+Style/IfWithBooleanLiteralBranches: # new in 1.9
+  Enabled: true
+Style/InPatternThen: # new in 1.16
+  Enabled: true
+Style/MultilineInPatternThen: # new in 1.16
+  Enabled: true
+Style/NegatedIfElseCondition: # new in 1.2
+  Enabled: true
+Style/NilLambda: # new in 1.3
+  Enabled: true
+Style/QuotedSymbols: # new in 1.16
+  Enabled: true
+Style/RedundantArgument: # new in 1.4
+  Enabled: true
+Style/RedundantSelfAssignmentBranch: # new in 1.19
+  Enabled: true
+Style/StringChars: # new in 1.12
+  Enabled: true
+Style/SwapValues: # new in 1.1
+  Enabled: true
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/LetSetup:
+  Enabled: false

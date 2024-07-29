@@ -1,0 +1,16 @@
+
+
+<% @posts.each do |post| %>
+  <div> 
+    <h4>
+        <%= link_to post.title, post_path(post) %><br>
+        <small><small> Submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.email %></small></small>
+    </h4>
+    <%= button_to "Delete post", post_path(post), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } } %>
+
+<% end %><br>
+
+<p>
+<%= link_to "New post",  new_post_path %>
+
+| <%= link_to "Only my posts", my_posts_path %>

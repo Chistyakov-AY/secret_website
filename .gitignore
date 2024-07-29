@@ -9,6 +9,7 @@
 
 # Ignore all environment files (except templates).
 /.env*
+/.byebug_history*
 !/.env*.erb
 
 # Ignore all logfiles and tempfiles.
@@ -33,3 +34,10 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
